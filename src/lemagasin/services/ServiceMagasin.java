@@ -28,6 +28,8 @@ public class ServiceMagasin {
      * serviceDate.
      */
     public ServiceMagasin() {
+        leMagasin = new Magasin();
+        serviceDate = new ServiceDate();
     }
 
     /**

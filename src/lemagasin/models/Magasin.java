@@ -263,7 +263,9 @@ public class Magasin {
     public String[] donneLesGenresDuStock() {
         String[] lesGenres = new String[NBR_MAX_ARTICLES_EN_STOCK];
         for (int i = 0; i < leStock.length; i++) {
+            if (leStock[i] != null) {
                 lesGenres[i] = leStock[i].getArticle().getGenre();
+            }
         }
         return lesGenres;
     }

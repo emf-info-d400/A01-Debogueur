@@ -1,23 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package lemagasin.models;
 
 import java.text.DecimalFormat;
 
-import lemagasin.models.Article;
-import lemagasin.models.ArticleStock;
-import lemagasin.models.ArticleVente;
-
 /**
- * logus EMF Fribourg Suisse $(name)
- *
- * Description
- *
- * @author waeberla
- * @version $(1.0)
- * @date : $(date)
+ * Modèle de l'application LeMagasin. Cette classe représente un article en
+ * vente.
+ * 
+ * @author Mario Ramalho
+ * @version 1.0.0
  */
 public class Magasin {
 
@@ -40,6 +30,25 @@ public class Magasin {
     public static final String MONTANTPATTERN = "#,###.00";
 
     /**
+     * Attribut tableau contenant tous les articles du stock
+     */
+    private ArticleStock[] leStock;
+    /**
+     * Attribut tableau contenant tous les éléments de la facture en cours...
+     */
+    private ArticleVente[] laFactureCourante;
+
+    /**
+     * Attribut mémorisant le montant total de la caisse.
+     */
+    private double montantDeLaCaisse;
+
+    /**
+     * Attribut mémorisant le montant de la facture courante.
+     */
+    private double montantDeLaFacture;
+
+    /**
      * Constructeur de la classe Magasin. Ici le constructeur ne fait que de
      * créer son attribut le Stock et initialise le montant de la caisse à 0.0
      */
@@ -54,13 +63,15 @@ public class Magasin {
      * tableau sont non null. A chaque article du stock (leStock[i] elle regarde
      * si l'attribut genre de son attribut article correspond au genre de
      * l'article passé en argument<BR>
-     * Si l'article correspond elle devra retourner l'index de l'article car l'article est
+     * Si l'article correspond elle devra retourner l'index de l'article car
+     * l'article est
      * présent sinon elle passera à l'article suivant.<BR>
      * Elle contrôle que la boucle ne dépasse pas la capacité du tableau.<BR>
      *
      * @param unArticleStock ArticleStock contient l'article à contrôler avec
-     * les éléments de la structure leStock.
-     * @return int l'index de la case du tableau où se trouve l'article s'il est présent sinon la valeur "-1".
+     *                       les éléments de la structure leStock.
+     * @return int l'index de la case du tableau où se trouve l'article s'il est
+     *         présent sinon la valeur "-1".
      */
     private int articlePresentEnStock(ArticleStock unArticleStock) {
         int index = -1;
@@ -68,7 +79,8 @@ public class Magasin {
         int compteur = 0;
         while (encore) {
             if (leStock[compteur] != null) {
-                if (leStock[compteur].getArticle().getGenre().equalsIgnoreCase(unArticleStock.getArticle().getGenre())) {
+                if (leStock[compteur].getArticle().getGenre()
+                        .equalsIgnoreCase(unArticleStock.getArticle().getGenre())) {
                     index = compteur;
                     encore = false;
                 }
@@ -82,7 +94,8 @@ public class Magasin {
     }
 
     /**
-     * Cette méthode est appelée par une autre méthode et ne s'occupe que d'ajouter un
+     * Cette méthode est appelée par une autre méthode et ne s'occupe que d'ajouter
+     * un
      * article passé en argument à la méthode dans la structure leStock. Pour ce
      * faire elle doit :<BR>
      * Parcourir la structure leStock et sitôt une place null, elle doit
@@ -91,7 +104,7 @@ public class Magasin {
      *
      * @param unArticleStock ArticleStock article qu'il faut ajouter.
      * @return boolean true si l'article a bien été ajouté sinon false
-     * plus de place 
+     *         plus de place
      */
     private boolean ajouteArticleDansStock(ArticleStock unArticleStock) {
         boolean ajouteOk = false;
@@ -116,10 +129,13 @@ public class Magasin {
      * Elle doit :<BR>
      * 1. Regarder si l'article passé en argument existe déjà dans leStock en
      * utilisant la méthode private articlePresentEnStock.<BR>
-     * 2. si l'article n'est pas présent (index = -1) alors elle l'ajoute au stock en
+     * 2. si l'article n'est pas présent (index = -1) alors elle l'ajoute au stock
+     * en
      * utilisant la méthode private ajouteArticleDansStock.<BR>
-     * 3. si l'article est présent (index != -1) alors il s'agira non pas d'un ajout mais d'une modification
-     * et les informations nbr et prix de l'article seront modifié. L'article concerné sera "pointé" par l'index retourné
+     * 3. si l'article est présent (index != -1) alors il s'agira non pas d'un ajout
+     * mais d'une modification
+     * et les informations nbr et prix de l'article seront modifié. L'article
+     * concerné sera "pointé" par l'index retourné
      * de la méthode articlePresentEnStock.<BR>
      *
      * @param unArticleStock l'article à ajouter ou à modifier au stock (leStock)
@@ -154,7 +170,7 @@ public class Magasin {
      * attributs du bean ArticleStock.<BR>
      *
      * @return String[] un tableau de String contenant les informations des
-     * articles contenus dans le tableau leStock.
+     *         articles contenus dans le tableau leStock.
      */
     public String[] sortLaListeDesArticlesDuStock() {
         String[] laListe = new String[leStock.length];
@@ -176,7 +192,7 @@ public class Magasin {
      * retourner ce compteur.<BR>
      *
      * @return int le nombre d'article présent dans leStock. Ce nombre variera
-     * entre 0 et leStock.length.
+     *         entre 0 et leStock.length.
      */
     public int donneLeNombreArticleEnStock() {
         int nbr = 0;
@@ -189,7 +205,8 @@ public class Magasin {
     }
 
     /**
-     * Cette méthode recherche le nombre d'éléments présents dans la facture courante 
+     * Cette méthode recherche le nombre d'éléments présents dans la facture
+     * courante
      * (qui n'est pas égal à la taille du tableau). <BR>
      * Pour ce faire elle doit : <BR>
      * Initialiser un compteur à 0. <BB>
@@ -197,8 +214,9 @@ public class Magasin {
      * incrémente le compteur.<BR>
      * retourner ce compteur.<BR>
      *
-     * @return int le nombre d'élément présent dans la facture courante. Ce nombre variera
-     * entre 0 et laFactureCourante.length.
+     * @return int le nombre d'élément présent dans la facture courante. Ce nombre
+     *         variera
+     *         entre 0 et laFactureCourante.length.
      */
     public int donneLeNombreArticleDansFacture() {
         int nbr = 0;
@@ -221,19 +239,20 @@ public class Magasin {
     public int donneLeNombreMaxArticlesEnStock() {
         return NBR_MAX_ARTICLES_EN_STOCK;
     }
-    
- /**
+
+    /**
      * Cette méthode ne fait que de retourner la taille du tableau de la facture
      * (laFactureCourante).
      *
      * @return int le nombre de case du tableau laFactureCourante
-     */   
-    public int donneLeNombreMaxArticlesDansFacture(){
+     */
+    public int donneLeNombreMaxArticlesDansFacture() {
         return NBR_MAX_ARTICLES_FACTURE;
     }
 
     /**
-     * Cette méthode recherche dans la structure leStock tous les genres (article) et les
+     * Cette méthode recherche dans la structure leStock tous les genres (article)
+     * et les
      * regroupe dans un tableau de String. Pour ce faire elle parcourt le
      * tableau leStock et pour chaque élément non null du tableau, elle sauve le
      * genre de l'article dans le tableau de String de sortie. (le tableau de
@@ -244,9 +263,7 @@ public class Magasin {
     public String[] donneLesGenresDuStock() {
         String[] lesGenres = new String[NBR_MAX_ARTICLES_EN_STOCK];
         for (int i = 0; i < leStock.length; i++) {
-            if (leStock[i] != null) {
                 lesGenres[i] = leStock[i].getArticle().getGenre();
-            }
         }
         return lesGenres;
     }
@@ -257,13 +274,14 @@ public class Magasin {
      * comme information true s'il y a assez d'articles ou false si le nombre
      * demandé est plus grand que le nombre disponible.<BR>
      * Pour le test d'un String il est important d'utiliser une méthode et non pas
-     * le "==". Si l'on désire faire un check d'égalité en ignorant la casse (majuscule, minuscule)
+     * le "==". Si l'on désire faire un check d'égalité en ignorant la casse
+     * (majuscule, minuscule)
      * on peut utiliser la méthode .equalsIgnoreCase en lieu et place à .equals
      *
      * @param genre String le genre d'article que l'on veut contrôler
-     * @param nbr int le nombre d'article qu'il fauzt contrôler
+     * @param nbr   int le nombre d'article qu'il fauzt contrôler
      * @return boolean true si le nombre en stock est suffisant (>= au nombre
-     * demandé) false sinon.
+     *         demandé) false sinon.
      */
     public boolean controleSiStockDisponible(String genre, int nbr) {
         boolean ok = false;
@@ -292,13 +310,14 @@ public class Magasin {
      * le faire uniquement si l'élément du tableau leStock est non null. Une
      * fois l'article trouvé, elle récupèrera son prix et le retournera.
      * Pour le test d'un String il est important d'utiliser une méthode et non pas
-     * le "==". Si l'on désire faire un check d'égalité en ignorant la casse (majuscule, minuscule)
+     * le "==". Si l'on désire faire un check d'égalité en ignorant la casse
+     * (majuscule, minuscule)
      * on peut utiliser la méthode .equalsIgnoreCase en lieu et place à .equals
      *
      * @param genre : String le genre de l'article pour lequel il faut
-     * rechercher le prix
+     *              rechercher le prix
      * @return double le prix de l'article recherché. Si aucun article n'est
-     * trouvé, le prix sera de 0.0.
+     *         trouvé, le prix sera de 0.0.
      */
     public double donnePrixArticle(String genre) {
         double prix = 0.0;
@@ -321,14 +340,15 @@ public class Magasin {
      * Une fois l'article trouvé, elle décrémente le nombre du stock du nombre
      * vendu.<BR>
      * Pour le test d'un String il est important d'utiliser une méthode et non pas
-     * le "==". Si l'on désire faire un check d'égalité en ignorant la casse (majuscule, minuscule)
+     * le "==". Si l'on désire faire un check d'égalité en ignorant la casse
+     * (majuscule, minuscule)
      * on peut utiliser la méthode .equalsIgnoreCase en lieu et place à .equals<BR>
      * 
      * A la fin si tout c'est bien passé et que le stock a été débité, elle
      * retournera true, sinon false.
      *
      * @param article: ArticleVente contenant le nombre d'articles vendus et une
-     * instance d'Article.
+     *                 instance d'Article.
      * @return : boolean true si la diminution a été effectuée sinon fase.
      */
     public boolean diminueLeStock(ArticleVente article) {
@@ -366,8 +386,9 @@ public class Magasin {
      * ne pas dépasser sa capacité.<BR>
      *
      * @param unArticle : ArticleVente comprenant un attribut nbr représentant
-     * le nombre d'article vendus et un attribut article contenant le genre et
-     * le prix unitaire.
+     *                  le nombre d'article vendus et un attribut article contenant
+     *                  le genre et
+     *                  le prix unitaire.
      * @return true si l'ajout à la facture a pu être fait sinon false.
      */
     public boolean ajouteArticleFature(ArticleVente unArticle) {
@@ -398,11 +419,11 @@ public class Magasin {
      * String. Chaque ligne représente une ligne de la facture.<BR>
      * Le tableau de String sera de la taille de laFactureCourante + 1 car sur
      * la dernière ligne il y aura le montant total de la facture.
-     * Il ne faut pas oublier de mémoriser le montant de la facture dans l'attribut 
+     * Il ne faut pas oublier de mémoriser le montant de la facture dans l'attribut
      * montantDeLaFacture.
      * 
      * @return String[] une version String de laFactureCourante avec en plus le
-     * montant total de la facture.
+     *         montant total de la facture.
      */
     public String[] donneEtatFactureCourante() {
         String[] laFacture = null;
@@ -412,7 +433,8 @@ public class Magasin {
             for (int i = 0; i < laFactureCourante.length; i++) {
                 if (laFactureCourante[i] != null) {
                     laFacture[i] = laFactureCourante[i].toString();
-                    montantDeLaFacture = montantDeLaFacture + (laFactureCourante[i].getNbr() * laFactureCourante[i].getArticle().getPrix());
+                    montantDeLaFacture = montantDeLaFacture
+                            + (laFactureCourante[i].getNbr() * laFactureCourante[i].getArticle().getPrix());
                 }
             }
             DecimalFormat formateur = new DecimalFormat(MONTANTPATTERN);
@@ -424,9 +446,10 @@ public class Magasin {
 
     /**
      * Cette méthode met simplement laFactureCourante à null et de ce fait
-     * initialise totalement laFactureCourante. Auparavant elle mettra à jour le 
-     * montant de la caisse (attribut montantDeLaCaisse) en utilisant l'attribut 
+     * initialise totalement laFactureCourante. Auparavant elle mettra à jour le
+     * montant de la caisse (attribut montantDeLaCaisse) en utilisant l'attribut
      * montantDeLaFacture qui mémorise le montant de la facture courante.
+     * 
      * @return double le montant de la caisse.
      */
     public double creeNouvelleFacture() {
@@ -434,22 +457,5 @@ public class Magasin {
         laFactureCourante = null;
         return montantDeLaCaisse;
     }
-    /**
-     * Attribut tableau contenant tous les articles du stock
-     */
-    private ArticleStock[] leStock;
-    /**
-     * Attribut tableau contenant tous les éléments de la facture en cours...
-     */
-    private ArticleVente[] laFactureCourante;
-    
-    /**
-     * Attribut mémorisant le montant total de la caisse.
-     */
-    private double montantDeLaCaisse;
-    
-    /**
-     * Attribut mémorisant le montant de la facture courante.
-     */
-    private double montantDeLaFacture;
+
 }

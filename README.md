@@ -16,7 +16,10 @@ Ce projet contient une application MVC qui a été développé par un autre dév
 
 **Tâches à effectuer pendant le débogage** : Ouvrir l'application [Microsoft Stream](https://www.office.com/launch/Stream/) et réaliser un enregistrement d'écran. Enregistrez toutes vos actions effectués sur Visual Studio Code et n'oubliez pas d'activer la webcam pour que l'on puisse voir votre visage. Le son par contre n'est pas nécessaire.
 
+
 ### 2. Définir les tâches lors du débogage
+
+
 
 ### 3. Visualisation d'une vidéo d'exemple
 

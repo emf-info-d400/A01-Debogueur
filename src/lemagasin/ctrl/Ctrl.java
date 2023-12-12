@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package lemagasin.ctrl;
 
 import lemagasin.models.Article;
@@ -11,86 +7,105 @@ import lemagasin.services.ServiceMagasin;
 import lemagasin.views.View;
 
 /**
- * logus EMF Fribourg Suisse $(name)
- *
- * Description
- *
- * @author waeberla
- * @version $(1.0)
- * @date : $(date)
+ * Classe de contrôle de l'application LeMagasin.
+ * 
+ * @author Mario Ramalho
+ * @version 1.0.0
  */
 public class Ctrl {
 
+    /**
+     * Attribut référence sur l'Ihm
+     */
+    private View refView;
+    /**
+     * Attribut référence sur le Wrk
+     */
+    private ServiceMagasin refServiceMagasin;
 
     public void startUp() {
         ArticleStock article1 = new ArticleStock(10, new Article("Pomme kg", 2.35));
-        refWrk.ajouteArticleStock(article1);
+        refServiceMagasin.ajouteArticleStock(article1);
         ArticleStock article2 = new ArticleStock(100, new Article("Poire kg", 2.55));
-        refWrk.ajouteArticleStock(article2);
+        refServiceMagasin.ajouteArticleStock(article2);
         ArticleStock article3 = new ArticleStock(9, new Article("Prune kg", 15.00));
-        refWrk.ajouteArticleStock(article3);
+        refServiceMagasin.ajouteArticleStock(article3);
         metAjourAffichage();
-        refIhm.ouvreLeMagasin();
+        refView.ouvreLeMagasin();
     }
 
     private void metAjourAffichage() {
-        String[] laListe = refWrk.sortLaListeDesArticlesStock();
-        refIhm.afficheLaListeDesArticlesEnStock(laListe);
-        int nbrEnStock = refWrk.donneNbrArticleStock();
-        int nbrMaxEnStock = refWrk.donneNbrMaxArticleDuStock();
-        refIhm.metAJourInfoDuStock(nbrEnStock, nbrMaxEnStock);
-        String[] lesGenres = refWrk.donneLesGenresDuStock();
-        refIhm.afficheComboGenresFacture(lesGenres);
+        String[] laListe = refServiceMagasin.sortLaListeDesArticlesStock();
+        refView.afficheLaListeDesArticlesEnStock(laListe);
+        int nbrEnStock = refServiceMagasin.donneNbrArticleStock();
+        int nbrMaxEnStock = refServiceMagasin.donneNbrMaxArticleDuStock();
+        refView.metAJourInfoDuStock(nbrEnStock, nbrMaxEnStock);
+        String[] lesGenres = refServiceMagasin.donneLesGenresDuStock();
+        refView.afficheComboGenresFacture(lesGenres);
     }
 
     /**
      * Cette méthode ajoute un article identifié par son genre, son nombre en
      * stock et son prix unitaire. Ces trois informations lui sont pasées en
-     * argument.<BR> Pour ce faire elle doit : <BR> 1. Créer un article instance
-     * de Article en lui passant le genre et le prix en paramètre.<BR> 2. Créer
+     * argument.<BR>
+     * Pour ce faire elle doit : <BR>
+     * 1. Créer un article instance
+     * de Article en lui passant le genre et le prix en paramètre.<BR>
+     * 2. Créer
      * un articleStock en lui passant le nombre et l'article créé juste
-     * auparvant.<BR> 3. demander à refWrk d'ajouter cet article par le bisias
-     * de la méthode ajouteArticleStock. <BR> 4. Si l'ajout c'est bien passé :
-     * <BR> 4. a. récupére la liste de String que lui retournera refWrk après
-     * l'appel à la méthode sortLaListeDesArticlesStock().<BR> 4. b. demade à
+     * auparvant.<BR>
+     * 3. demander à refWrk d'ajouter cet article par le bisias
+     * de la méthode ajouteArticleStock. <BR>
+     * 4. Si l'ajout c'est bien passé :
+     * <BR>
+     * 4. a. récupére la liste de String que lui retournera refWrk après
+     * l'appel à la méthode sortLaListeDesArticlesStock().<BR>
+     * 4. b. demade à
      * refIhm d'afficher ces articles du stock par le biais de sa méthode
-     * afficheLaListeDesArticlesEnStock.<BR>> 4. c. récupère le nombre d'article
+     * afficheLaListeDesArticlesEnStock.<BR>
+     * > 4. c. récupère le nombre d'article
      * en stock que lui retournera refWrk après l'appel à donneNbrArticleStock()
-     * <BR> 4. d. récupère le nombre maximum d'article du stock que lui
-     * retournera refWrk après l'appel à donneNbrMaxArticleDuStock()<BR> 4. e.
+     * <BR>
+     * 4. d. récupère le nombre maximum d'article du stock que lui
+     * retournera refWrk après l'appel à donneNbrMaxArticleDuStock()<BR>
+     * 4. e.
      * demande à refIhm, d'afficher les infos du stock par le biais de
-     * metAJourInfoDuStock. <BR> 4. f. récupère le tableau de String que lui
-     * retournera refWrk aprèsl'appel à donneLesGenresDuStock()<BR> 4. g.
+     * metAJourInfoDuStock. <BR>
+     * 4. f. récupère le tableau de String que lui
+     * retournera refWrk aprèsl'appel à donneLesGenresDuStock()<BR>
+     * 4. g.
      * demande à refIhm d'afficher le combo genre par le biais de
      * afficheComboGenresFacture.<BR>
      *
      * @param genre String le genre de la'rticle à ajouter au stock.
-     * @param nbr int le nombre d'article du stock.
-     * @param prix double le prix unitaire de l'article.
+     * @param nbr   int le nombre d'article du stock.
+     * @param prix  double le prix unitaire de l'article.
      */
     public void ajouteArticleStock(String genre, int nbr, double prix) {
         Article article = new Article(genre, prix);
         ArticleStock articleStock = new ArticleStock(nbr, article);
-        boolean ajouteOk = refWrk.ajouteArticleStock(articleStock);
+        boolean ajouteOk = refServiceMagasin.ajouteArticleStock(articleStock);
         if (ajouteOk) {
             metAjourAffichage();
         } else {
-            refIhm.afficheErreur("Impossible d'ajouter cet article");
+            refView.afficheErreur("Impossible d'ajouter cet article");
         }
     }
 
     /**
-     * Cette méthode contrôle si l'article est dans le stock.<BR> Elle demade à
+     * Cette méthode contrôle si l'article est dans le stock.<BR>
+     * Elle demade à
      * refWrk de contrôler et ensuite retourne l'inofrmation boolean à
      * l'appelant, ici Ihm.
      *
      * @param genre Stirng le genre à contrôler.
-     * @param nbr int le nombre d'article que l'on voudrait (devra être <= au
-     * nombre en stock. @return boolean true si disponible (nbr <= nombre du
-     * stock) false sinon.
+     * @param nbr   int le nombre d'article que l'on voudrait (devra être <= au
+     *              nombre en stock. @return boolean true si disponible (nbr <=
+     *              nombre du
+     *              stock) false sinon.
      */
     public boolean controleSiStockDisponible(String genre, int nbr) {
-        boolean ok = refWrk.controleSiStockDisponible(genre, nbr);
+        boolean ok = refServiceMagasin.controleSiStockDisponible(genre, nbr);
         return ok;
     }
 
@@ -117,25 +132,25 @@ public class Ctrl {
      * termineFacture().
      *
      * @param genre : String le genre de l'article à ajouter à la facture
-     * @param nbr : int le nombre d'article vendu.
+     * @param nbr   : int le nombre d'article vendu.
      */
     public void ajouteArticleFacture(String genre, int nbr) {
         boolean stockDispo = controleSiStockDisponible(genre, nbr);
         if (stockDispo) {
-            double prix = refWrk.donnePrixArticle(genre);
+            double prix = refServiceMagasin.donnePrixArticle(genre);
             Article article = new Article(genre, prix);
             ArticleVente unArticle = new ArticleVente(nbr, article);
-            boolean ok = refWrk.ajouteArticleFacture(unArticle);
+            boolean ok = refServiceMagasin.ajouteArticleFacture(unArticle);
             if (ok) {
-                int nbrElemFact = refWrk.donneNbrElemFact();
-                int nbrMaxElemFact = refWrk.donneNbrMaxElemFact();
-                refIhm.metAJourInfoFacture(nbrElemFact, nbrMaxElemFact);
-                String[] laListe = refWrk.sortLaListeDesArticlesStock();
-                refIhm.afficheLaListeDesArticlesEnStock(laListe);
+                int nbrElemFact = refServiceMagasin.donneNbrElemFact();
+                int nbrMaxElemFact = refServiceMagasin.donneNbrMaxElemFact();
+                refView.metAJourInfoFacture(nbrElemFact, nbrMaxElemFact);
+                String[] laListe = refServiceMagasin.sortLaListeDesArticlesStock();
+                refView.afficheLaListeDesArticlesEnStock(laListe);
                 termineFacture();
             }
         } else {
-            refIhm.afficheErreur("Il n'y a pas assez d'article en Stock pour effectuer cet achat");
+            refView.afficheErreur("Il n'y a pas assez d'article en Stock pour effectuer cet achat");
         }
     }
 
@@ -153,13 +168,13 @@ public class Ctrl {
      * facture à afficher".
      */
     public void termineFacture() {
-        String[] laFacture = refWrk.termineFacture();
+        String[] laFacture = refServiceMagasin.termineFacture();
         if (laFacture != null) {
-            String dateCourante = refWrk.donneDateDuJour();
-            refIhm.afficheTitreFacture(dateCourante);
-            refIhm.afficheFacture(laFacture);
+            String dateCourante = refServiceMagasin.donneDateDuJour();
+            refView.afficheTitreFacture(dateCourante);
+            refView.afficheFacture(laFacture);
         } else {
-            refIhm.afficheErreur("Pas de facture à afficher");
+            refView.afficheErreur("Pas de facture à afficher");
         }
     }
 
@@ -167,32 +182,41 @@ public class Ctrl {
      * Cette méthode demande à refWrk de créer une nouvelle facture.
      */
     public void creeNouvelleFacture() {
-        double montantDeLaCaisse = refWrk.creeNouvelleFacture();
-        refIhm.afficheMontantDeLaCaisse(montantDeLaCaisse);
-        refIhm.effaceFacture();
+        double montantDeLaCaisse = refServiceMagasin.creeNouvelleFacture();
+        refView.afficheMontantDeLaCaisse(montantDeLaCaisse);
+        refView.effaceFacture();
     }
 
-    public View getRefIhm() {
-        return refIhm;
-    }
-
-    public void setRefIhm(View refIhm) {
-        this.refIhm = refIhm;
-    }
-
-    public ServiceMagasin getRefWrk() {
-        return refWrk;
-    }
-
-    public void setRefWrk(ServiceMagasin refWrk) {
-        this.refWrk = refWrk;
-    }
     /**
-     * Attribut référence sur l'Ihm
+     * Getter de l'attribut refView
+     * @return View l'attribut refView
      */
-    private View refIhm;
+    public View getRefView() {
+        return refView;
+    }
+
     /**
-     * Attribut référence sur le Wrk
+     * Setter de l'attribut refView
+     * @param refView View l'attribut refView
      */
-    private ServiceMagasin refWrk;
+    public void setRefView(View refView) {
+        this.refView = refView;
+    }
+
+    /**
+     * Getter de l'attribut refServiceMagasin
+     * @return ServiceMagasin l'attribut refServiceMagasin
+     */
+    public ServiceMagasin getRefService() {
+        return refServiceMagasin;
+    }
+
+    /**
+     * Setter de l'attribut refServiceMagasin
+     * @param refWrk ServiceMagasin l'attribut refServiceMagasin
+     */
+    public void setRefService(ServiceMagasin refWrk) {
+        this.refServiceMagasin = refWrk;
+    }
+
 }

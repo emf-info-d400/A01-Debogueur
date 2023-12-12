@@ -25,8 +25,8 @@ public class LeMagasin {
         Ctrl ctrl = new Ctrl();
         View ihm = new View();
         ServiceMagasin wrk = new ServiceMagasin();
-        ctrl.setRefIhm(ihm);
-        ctrl.setRefWrk(wrk);
+        ctrl.setRefView(ihm);
+        ctrl.setRefService(wrk);
         ihm.setRefCtrl(ctrl);
         ctrl.startUp();
     }

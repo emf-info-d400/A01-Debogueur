@@ -209,7 +209,7 @@ public class View extends javax.swing.JFrame {
         lTitre1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lTitre1.setText("Achat d'article");
 
-        //bAjoutePanier.setIcon(new javax.swing.ImageIcon(getClass().getResource("ressources/images/panier1.gif"))); // NOI18N
+        bAjoutePanier.setIcon(new javax.swing.ImageIcon(getClass().getResource("ressources/images/panier1.gif"))); // NOI18N
         bAjoutePanier.setToolTipText("Ajoute un achat au panier");
         bAjoutePanier.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bAjoutePanier.setBorderPainted(false);
@@ -362,13 +362,13 @@ public class View extends javax.swing.JFrame {
 
         lLogo.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         lLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        //lLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("ressources/images/miniMarketLogo.jpg"))); // NOI18N
+        lLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("ressources/images/miniMarketLogo.jpg"))); // NOI18N
         lLogo.setText("Mon petit magasin");
 
         bOuverture.setBackground(new java.awt.Color(255, 255, 255));
         bOuverture.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         bOuverture.setForeground(new java.awt.Color(255, 255, 255));
-        //bOuverture.setIcon(new javax.swing.ImageIcon(getClass().getResource("ressources/images/ferme.gif"))); // NOI18N
+        bOuverture.setIcon(new javax.swing.ImageIcon(getClass().getResource("ressources/images/ferme.gif"))); // NOI18N
         bOuverture.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bOuvertureActionPerformed(evt);

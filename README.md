@@ -21,8 +21,7 @@ Ce projet contient une application MVC qui a été développée par un autre dé
 - :exclamation: N'oubliez pas d'activer la webcam pour que l'on puisse voir votre visage.
 - Le son par contre n'est pas nécessaire.
 - La longueur maximale de la vidéo est fixée par Stream à 15 min. Si vous n'avez pas réussi à corriger tous les problèmes durant les 15 min, vous pouvez vous arrêter là.
-- Ensuite, vous pouvez réaliser un commit/push de votre projet.
-
+- Vous garder votre vidéo chez vous pour que vous puissiez la revisionner lors de l'étape 4.
 ![Stream Exemple](images/stream.png)
 
 

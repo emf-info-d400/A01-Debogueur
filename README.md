@@ -18,7 +18,7 @@ Ce projet contient une application MVC qui a été développée par un autre dé
 - Ouvrir l'application [Microsoft Stream](https://www.office.com/launch/Stream/)
 - Réaliser un enregistrement d'écran
 - Enregistrez toutes vos actions effectués sur Visual Studio Code
-- :exclamation: N'oubliez pas d'activer la webcam pour que l'on puisse voir votre visage.
+- ⚠️: N'oubliez pas d'activer la webcam pour que l'on puisse voir votre visage.
 - Le son par contre n'est pas nécessaire.
 - La longueur maximale de la vidéo est fixée par Stream à 15 min. Si vous n'avez pas réussi à corriger tous les problèmes durant les 15 min, vous pouvez vous arrêter là.
 - Vous garder votre vidéo chez vous pour que vous puissiez la revisionner lors de l'étape 4.

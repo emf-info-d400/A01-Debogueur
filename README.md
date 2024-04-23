@@ -26,7 +26,7 @@ Ce projet contient une application MVC qui a été développée par un autre dé
 
 
 ### 2. Définir les tâches lors du débogage
-Durant cette étape, merci de lister dans le fichier [TACHES.md](TACHES.md), toutes les tâches que vosu devez réaliser lorque vous réaliser un débogage. Réalisez ceci de manière individuelle. Dès que vous avez terminé, vous pouvez réaliser un commit/push de votre projet.
+Durant cette étape, merci de lister dans le fichier [TACHES.md](TACHES.md), toutes les tâches que vous devez réaliser lorque vous réaliser un débogage. Réalisez ceci de manière individuelle. Dès que vous avez terminé, vous pouvez réaliser un commit/push de votre projet.
 
 ### 3. Visualisation d'une vidéo d'exemple
 Le professeur va vous montrer une [vidéo d'exemple](https://eduetatfr-my.sharepoint.com/:v:/g/personal/mario_ramalho_edufr_ch/EVhDgEABJSFAusRua3ByHqwBnX6egV5314mygF1csH1KoA?e=mqKKAb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D) pour vous expliquer comment fonctionne l'auto-confrontation que vous allez réaliser à l'étape 4. L'objectif de cette étape est d'analyser de manière constructive la vidéo de votre collègue.

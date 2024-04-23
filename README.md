@@ -1,6 +1,6 @@
 ## Atelier du débogueur
 
-Bienvenue à l'atelier du débogueur.Cette activité sera réalisée en classe et sera structurée de la manière suivante :  
+Bienvenue à l'atelier du débogueur. Cette activité sera réalisée en classe et sera structurée de la manière suivante :  
 
 ## Les étapes
 

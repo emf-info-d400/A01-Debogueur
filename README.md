@@ -4,7 +4,7 @@ Bienvenue à l'atelier du débogueur. Cette activité sera réalisée en classe 
 
 ## Les étapes
 
-1. Débogagage d'une application identique avec enregistrement de l'écran et de son visage
+1. Débogage d'une application identique avec enregistrement de l'écran et de son visage
 2. Définir les tâches lors du débogage ensemble par toute la classe
 3. Visualisation d'une vidéo d'exemple pour comprendre l'activité d'auto-confrontation
 5. Auto-confrontation par groupe de 3 personnes
